@@ -1,24 +1,22 @@
+const randNumber = Math.floor(Math.random() * 100) + 1;
+console.log(randNumber);
 let previousValue = document.getElementById("previousValue");
 let ItemRemaining = document.getElementById("ItemRemaining");
-function addItem() {
-  console.log(num);
-  let meao = document.getElementById("inputBox").value;
-  if (num == meao) {
-    console.log("done");
+let submit = document.getElementById("subt");
+let numGuess = 0;
+let prevGuess = [];
+submit.addEventListener("click", function () {
+  let inputBox = document.getElementById("inputBox").value;
+  if (randNumber === inputBox) {
+    console.log("match");
   } else {
-    // console.log("not");
-    for (let index = 0; index < 3; index++) {
-      previousValue.innerHTML = "previous guess :" + meao;
-    }
-    for (let fuki = 9; fuki >= 0; fuki--) {
-      ItemRemaining.innerHTML = "guess remaining :" + fuki;
-    //   break;
+    prevGuess.push(+inputBox);
+    previousValue.innerHTML = `previous guess :${prevGuess}`;
+    numGuess++;
+    ItemRemaining.innerHTML = `guess remaining :${3 - numGuess}`;
+    if (numGuess == 3) {
+      submit.setAttribute("disabled", "");
+      console.log("disable");
     }
   }
-}
-// function for random number
-let num;
-function randNumb() {
-  return (num = Math.floor(Math.random() * 10));
-}
-randNumb();
+});
